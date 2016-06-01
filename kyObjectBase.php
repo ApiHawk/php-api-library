@@ -98,12 +98,6 @@ abstract class kyObjectBase {
 			$this->parseData($data);
 	}
 
-	/**
-	 * Creates new object. Compatible with method chaining.
-	 */
-	static public function createNew() {
-		return new static();
-	}
 
 	/**
 	 * Returns object controller.
