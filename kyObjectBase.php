@@ -20,8 +20,14 @@ abstract class kyObjectBase {
 	 * @var string
 	 */
 	const FILES_DATA_NAME = '_files';
+    /**
+     * Store Api responses
+     *
+     * @var
+     */
+    public static $result;
 
-	/**
+    /**
 	 * Default Kayako controller used to operate on this objects. Override in descending classes.
 	 * @var string
 	 */
@@ -235,6 +241,7 @@ abstract class kyObjectBase {
 	 */
 	static public function getAll($search_parameters = array()) {
 		$result = self::getRESTClient()->get(static::$controller, $search_parameters);
+        self::$result = $result;
 		$objects = array();
 		if (array_key_exists(static::$object_xml_name, $result)) {
 			foreach ($result[static::$object_xml_name] as $object_data) {
@@ -253,7 +260,10 @@ abstract class kyObjectBase {
 	static public function get($id) {
 		if (!is_array($id))
 			$id = array($id);
+
 		$result = self::getRESTClient()->get(static::$controller, $id);
+        self::$result = $result;
+
 		if (count($result) === 0)
 			return null;
 		return new static($result[static::$object_xml_name][0]);
@@ -294,12 +304,14 @@ abstract class kyObjectBase {
 			throw new BadMethodCallException(sprintf("You can't create new objects of type %s.", get_called_class()));
 
 		$result = self::getRESTClient()->post(static::$controller, array(), $this->buildData(true));
+        self::$result = $result;
 
-		if (count($result) === 0)
+		if (count($result) === 0){
 			throw new kyException("No data returned by the server after creating the object.");
+        }
 
 		$this->parseData($result[static::$object_xml_name][0]);
-		return $this;
+        return $this;
 	}
 
 	/**

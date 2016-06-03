@@ -279,9 +279,11 @@ class kyTicketPost extends kyObjectBase
      */
     static public function getAll($search_parameters = array())
     {
+        if(is_array($search_parameters )){
         $search_parameters[] = array('ListAll');
 
         return parent::getAll($search_parameters);
+        }
     }
 
 
