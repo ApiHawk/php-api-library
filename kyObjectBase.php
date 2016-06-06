@@ -329,7 +329,7 @@ abstract class kyObjectBase {
 			throw new BadMethodCallException(sprintf("You can't update object before it was created. Create it first.", get_called_class()));
 
 		$result = self::getRESTClient()->put(static::$controller, $this->getId(true), $this->buildData(false));
-
+		self::$result  = $result;
 		if (count($result) === 0)
 			throw new kyException("No data returned by the server after updating the object.");
 

@@ -511,34 +511,34 @@ class kyTicket extends kyObjectWithCustomFieldsBase
         $this->id = intval($data['_attributes']['id']);
         $this->flag_type = intval($data['_attributes']['flagtype']);
         $this->display_id = $data['displayid'];
-        $this->department_id = ky_assure_positive_int($data['departmentid']);
-        $this->status_id = ky_assure_positive_int($data['statusid']);
-        $this->priority_id = ky_assure_positive_int($data['priorityid']);
-        $this->type_id = ky_assure_positive_int($data['typeid']);
-        $this->user_id = ky_assure_positive_int($data['userid']);
+        $this->department_id = ky_assure_positive_int((int)$data['departmentid']);
+        $this->status_id = ky_assure_positive_int((int)$data['statusid']);
+        $this->priority_id = ky_assure_positive_int((int)$data['priorityid']);
+        $this->type_id = ky_assure_positive_int((int)$data['typeid']);
+        $this->user_id = ky_assure_positive_int((int)$data['userid']);
         $this->user_organization_name = $data['userorganization'];
-        $this->user_organization_id = ky_assure_positive_int($data['userorganizationid']);
-        $this->owner_staff_id = ky_assure_positive_int($data['ownerstaffid']);
+        $this->user_organization_id = ky_assure_positive_int((int)$data['userorganizationid']);
+        $this->owner_staff_id = ky_assure_positive_int((int)$data['ownerstaffid']);
         $this->owner_staff_name = $data['ownerstaffname'];
         $this->full_name = $data['fullname'];
         $this->email = $data['email'];
         $this->last_replier = $data['lastreplier'];
         $this->subject = $data['subject'];
-        $this->creation_time = ky_assure_positive_int($data['creationtime']);
-        $this->last_activity = ky_assure_positive_int($data['lastactivity']);
-        $this->last_staff_reply = ky_assure_positive_int($data['laststaffreply']);
-        $this->last_user_reply = ky_assure_positive_int($data['lastuserreply']);
-        $this->sla_plan_id = ky_assure_positive_int($data['slaplanid']);
-        $this->next_reply_due = ky_assure_positive_int($data['nextreplydue']);
-        $this->resolution_due = ky_assure_positive_int($data['resolutiondue']);
+        $this->creation_time = ky_assure_positive_int((int)$data['creationtime']);
+        $this->last_activity = ky_assure_positive_int((int)$data['lastactivity']);
+        $this->last_staff_reply = ky_assure_positive_int((int)$data['laststaffreply']);
+        $this->last_user_reply = ky_assure_positive_int((int)$data['lastuserreply']);
+        $this->sla_plan_id = ky_assure_positive_int((int)$data['slaplanid']);
+        $this->next_reply_due = ky_assure_positive_int((int)$data['nextreplydue']);
+        $this->resolution_due = ky_assure_positive_int((int)$data['resolutiondue']);
         $this->replies = intval($data['replies']);
         $this->ip_address = $data['ipaddress'];
         $this->creator = intval($data['creator']);
         $this->creation_mode = intval($data['creationmode']);
         $this->creation_type = intval($data['creationtype']);
-        $this->is_escalated = ky_assure_bool($data['isescalated']);
-        $this->escalation_rule_id = ky_assure_positive_int($data['escalationruleid']);
-        $this->template_group_id = ky_assure_positive_int($data['templategroupid']);
+        $this->is_escalated = ky_assure_bool((bool)$data['isescalated']);
+        $this->escalation_rule_id = ky_assure_positive_int((int)$data['escalationruleid']);
+        $this->template_group_id = ky_assure_positive_int((int)$data['templategroupid']);
         if (is_numeric($data['templategroupid']) && !empty($data['templategroupid']) && isset($data['templategroupname'])) {
             $this->template_group_name = $data['templategroupname'];
         }
@@ -547,14 +547,14 @@ class kyTicket extends kyObjectWithCustomFieldsBase
         $this->watchers = array();
         if (array_key_exists('watcher', $data)) {
             foreach ($data['watcher'] as $watcher) {
-                $this->watchers[] = array('staff_id' => intval($watcher['_attributes']['staffid']), 'name' => $watcher['_attributes']['name']);
+                $this->watchers[] = array('staff_id' => intval((int)$watcher['_attributes']['staffid']), 'name' => $watcher['_attributes']['name']);
             }
         }
 
         $this->workflows = array();
         if (array_key_exists('workflow', $data)) {
             foreach ($data['workflow'] as $workflow) {
-                $this->workflows[] = array('id' => intval($workflow['_attributes']['id']), 'title' => $workflow['_attributes']['title']);
+                $this->workflows[] = array('id' => intval((int)$workflow['_attributes']['id']), 'title' => $workflow['_attributes']['title']);
             }
         }
 
