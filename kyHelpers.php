@@ -31,9 +31,9 @@ if (!function_exists('ky_xml_to_array')) {
 
         if (is_string($xml))
             // not xml message
-            if (!strpos($xml, '<?xml')) {
-                throw new \Exception($xml);
-            }
+//            if (!strpos($xml, '<?xml')) {
+//                throw new \Exception($xml);
+//            }
             $xml = new SimpleXMLElement($xml);
 
         if (!($xml instanceof SimpleXMLElement))
