@@ -30,11 +30,14 @@ if (!function_exists('ky_xml_to_array')) {
         $arr = array();
 
         if (is_string($xml))
-            // not xml message
-//            if (!strpos($xml, '<?xml')) {
-//                throw new \Exception($xml);
-//            }
-            $xml = new SimpleXMLElement($xml);
+
+            if (is_string($xml) && !strstr($xml, '<?xml version=')) {
+                throw new \Exception($xml, 502);
+            }
+
+            if (is_string($xml) && !empty((trim($xml))) && strstr($xml, '<?xml version=')) {
+                $xml = new SimpleXMLElement($xml);
+            }
 
         if (!($xml instanceof SimpleXMLElement))
             return $arr;
