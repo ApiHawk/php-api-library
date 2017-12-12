@@ -704,12 +704,20 @@ class kyTicket extends kyObjectWithCustomFieldsBase
         } elseif ($owner_staffs instanceof kyResultSet) {
             $owner_staff_ids = $owner_staffs->collectId();
         }
+        else if (is_array($owner_staffs))
+        {
+            $owner_staff_ids = $owner_staffs;
+        }
 
         $user_ids = array();
         if ($users instanceof kyUser) {
             $user_ids = array($users->getId());
         } elseif ($users instanceof kyResultSet) {
             $user_ids = $users->collectId();
+        }
+        else if (is_array($users))
+        {
+            $user_ids = $users;
         }
 
         $search_parameters[] = implode(',', $department_ids);
